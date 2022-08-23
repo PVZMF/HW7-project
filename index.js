@@ -107,7 +107,10 @@ class Bishop extends Mohreh {
   }
 
   move(x, y) {
-    if ( Math.abs(this._x - x) !== Math.abs(this._y - y)) {
+    const row = ["a","b","c","d","e","f","g","h"];
+    let xold = row.indexOf(this._x);
+    let xnew = row.indexOf(x);
+    if ( Math.abs(xold - xnew) !== Math.abs(this._y - y)) {
       throw new Error("you can't move here");
     }
     super.move(x, y);
@@ -121,7 +124,12 @@ class Night extends Mohreh {
   }
 
   move(x, y) {
-    if ( (Math.abs(this._x-x) !==2 && Math.abs(this._y-y)) || (Math.abs(this._y-y) !==2 && Math.abs(this._x-x))) {
+    const row = ["a","b","c","d","e","f","g","h"];
+    let xold = row.indexOf(this._x);
+    let xnew = row.indexOf(x);
+    if ( !((Math.abs(xold-xnew) ===2 && Math.abs(this._y-y)===1) || (Math.abs(this._y-y) ===2 && Math.abs(xnew-xold)===1))) {
+      console.log(Math.abs(xnew));
+      console.log(Math.abs(xold));
       throw new Error("you can't move here");
     }
     super.move(x, y);
@@ -135,7 +143,10 @@ class Queen extends Mohreh {
   }
 
   move(x, y) {
-    if ( (Math.abs(this._x - x) !== Math.abs(this._y - y)) && (this._x !== x || this._y !== y)) {
+    const row = ["a","b","c","d","e","f","g","h"];
+    let xold = row.indexOf(this._x);
+    let xnew = row.indexOf(x);
+    if ( (Math.abs(xnew- xold) !== Math.abs(this._y - y)) && (this._x !== x || this._y !== y)) {
       throw new Error("you can't move here");
     }
     super.move(x, y);
@@ -148,7 +159,10 @@ class King extends Mohreh {
     this._name = "Soldier";
   }
   move(x, y) {
-    if ((this._x-x)<2 && y-this._y<2) {
+    const row = ["a","b","c","d","e","f","g","h"];
+    let xold = row.indexOf(this._x);
+    let xnew = row.indexOf(x);
+    if ((Math.abs(xnew-xold))>2 && Math.abs(y-this._y>2)) {
       throw new Error("you can't move here");
     }
     super.move(x, y);
@@ -158,4 +172,5 @@ class King extends Mohreh {
 const board = new Board();
 const soldier = new Soldier("white", "a", 2, board);
 const soldier2 = new Soldier("white", "b", 4,board);
-soldier.move("a", 3);
+const asb = new Night("white", "b", 1,board);
+asb.move("c" , 3);
