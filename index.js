@@ -86,6 +86,7 @@ class Soldier extends Mohreh {
   }
 }
 
+
 class Rook extends Mohreh {
   constructor(color, x, y, board) {
     super(color, x, y, board);
@@ -93,12 +94,13 @@ class Rook extends Mohreh {
   }
 
   move(x, y) {
-    if ( this._x !== x || this._y !== y) {
+    if ( this._x !== x && this._y !== y) {
       throw new Error("you can't move here");
     }
     super.move(x, y);
   }
 }
+
 
 class Bishop extends Mohreh {
   constructor(color, x, y, board) {
@@ -117,7 +119,7 @@ class Bishop extends Mohreh {
   }
 }
 
-class Night extends Mohreh {
+class knight extends Mohreh {
   constructor(color, x, y, board) {
     super(color, x, y, board);
     this._name = "Night";
@@ -127,9 +129,7 @@ class Night extends Mohreh {
     const row = ["a","b","c","d","e","f","g","h"];
     let xold = row.indexOf(this._x);
     let xnew = row.indexOf(x);
-    if ( !((Math.abs(xold-xnew) ===2 && Math.abs(this._y-y)===1) || (Math.abs(this._y-y) ===2 && Math.abs(xnew-xold)===1))) {
-      console.log(Math.abs(xnew));
-      console.log(Math.abs(xold));
+    if (!((Math.abs(xold-xnew) ===2 && Math.abs(this._y-y)===1) || (Math.abs(this._y-y) ===2 && Math.abs(xnew-xold)===1))) {
       throw new Error("you can't move here");
     }
     super.move(x, y);
@@ -146,7 +146,7 @@ class Queen extends Mohreh {
     const row = ["a","b","c","d","e","f","g","h"];
     let xold = row.indexOf(this._x);
     let xnew = row.indexOf(x);
-    if ( (Math.abs(xnew- xold) !== Math.abs(this._y - y)) && (this._x !== x || this._y !== y)) {
+    if ( (Math.abs(xnew- xold) !== Math.abs(this._y - y)) && (this._x !== x && this._y !== y)) {
       throw new Error("you can't move here");
     }
     super.move(x, y);
@@ -162,7 +162,7 @@ class King extends Mohreh {
     const row = ["a","b","c","d","e","f","g","h"];
     let xold = row.indexOf(this._x);
     let xnew = row.indexOf(x);
-    if ((Math.abs(xnew-xold))>2 && Math.abs(y-this._y>2)) {
+    if ((Math.abs(xnew-xold))>1 && Math.abs(y-this._y>1)) {
       throw new Error("you can't move here");
     }
     super.move(x, y);
